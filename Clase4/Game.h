@@ -3,13 +3,14 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
+using namespace std;
 
 class Game
 {
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
-	bool isRunning;
+	bool isRunning = false;
 public:
 	Game();
 	~Game();
