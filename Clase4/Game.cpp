@@ -1,7 +1,9 @@
 #include "Game.h"
+#include "TextureManager.h"
+#include "GameObject.h"
 
-SDL_Texture* playerTexture;
-SDL_Rect srcR, destR;
+GameObject* player;
+
 int cnt = 0;
 
 Game::Game()
@@ -29,43 +31,28 @@ void Game::init(const char* windowTitle, int xpos, int ypos, int width, int heig
 		isRunning = true;
 
 	}
-	SDL_Surface* tmpSurface = IMG_Load("Sprite/player.png");
-
-	if (tmpSurface == NULL)
-	{
-		cout << "Error al cargar player" << endl;
-	}
-
-	playerTexture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-	SDL_FreeSurface(tmpSurface);
+	player = new GameObject("Sprite/player.png", renderer, 0, 0);
 }
 
 void Game::handleEvents()
 {
 	SDL_Event event;
 	SDL_PollEvent(&event);
-	switch (event.type)
-	{
-		case SDL_QUIT:
-			isRunning = false;
-			break;
-		default:	
-		break;
-	}
+	if (event.type == SDL_QUIT)
+		isRunning = false;
+	else
+		player->handleInput(event);
 }
 
 void Game::update()
 {
-	cnt++;
-	destR.h = 64;
-	destR.w = 64;
-	destR.x = cnt;
+	player->update();
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, playerTexture, NULL, &destR);
+	player->render();
 	SDL_RenderPresent(renderer);
 }
 
