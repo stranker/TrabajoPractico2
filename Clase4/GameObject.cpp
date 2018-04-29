@@ -8,6 +8,7 @@ GameObject::GameObject(const char* textureSheet, SDL_Renderer* rend, int x, int 
 	ypos = y;
 	velocityX = 0;
 	velocityY = 0;
+	animationTime = 0;
 }
 GameObject::~GameObject()
 {
@@ -20,9 +21,10 @@ void GameObject::render()
 	SDL_RenderCopy(renderer, texture, &srcRect, &destRect);
 }
 
-void GameObject::setVelocityY(int val)
+void GameObject::setVelocity(int x, int y)
 {
-	velocityY = val;
+	velocityX = x;
+	velocityY = y;
 }
 
 void GameObject::move(int x, int y)
@@ -46,15 +48,24 @@ int GameObject::getVelocityY()
 	return velocityY;
 }
 
-void GameObject::animateSprite()
+int GameObject::getVelocityX()
 {
-	setSrcRect(32, 96, srcRect.x, 0);
-	if (srcRect.x < totalWidthTexture - srcRect.w)
-		srcRect.x += srcRect.w;
-	else
-		srcRect.x = 0;
-	cout << srcRect.x << endl;
-	setDestRect(32, 96, getXpos(), getYpos());
+	return velocityX;
+}
+
+void GameObject::animateSprite(float deltaTime)
+{
+	animationTime += deltaTime;
+	if (animationTime > 1)
+	{
+		animationTime = 0;
+		setSrcRect(srcRect.h,srcRect.w, srcRect.x, 0);
+		if (srcRect.x < totalWidthTexture - srcRect.w)
+			srcRect.x += srcRect.w;
+		else
+			srcRect.x = 0;
+	}
+	setDestRect(srcRect.h, srcRect.w, xpos, ypos);
 }
 
 void GameObject::setSrcRect(int h, int w, int x, int y)
@@ -77,15 +88,29 @@ void GameObject::clampObject(int xMin, int xMax, int yMin, int yMax)
 {
 	if (xpos <= xMin)
 		xpos = xMin;
-	else if (xpos >= xMax)
-		xpos = xMax;
+	else if (xpos >= xMax - srcRect.w)
+		xpos = xMax - srcRect.w;
 	if (ypos <= yMin)
 		ypos = yMin;
-	else if (ypos >= yMax - destRect.h)
-		ypos = yMax - destRect.h;
+	else if (ypos >= yMax - srcRect.h)
+		ypos = yMax - srcRect.h;
 }
 
 void GameObject::setTotalWidthTexture(int val)
 {
 	totalWidthTexture = val;
+}
+
+void GameObject::createCollider(int h, int w)
+{
+	collider.h = h;
+	collider.w = w;
+}
+
+void GameObject::colliderUpdate()
+{
+	collider.x = xpos;
+	collider.y = ypos;
+	collider.h = srcRect.h;
+	collider.w = srcRect.w;
 }
