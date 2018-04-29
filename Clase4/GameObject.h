@@ -9,17 +9,26 @@ using namespace std;
 class GameObject
 {
 public:
-	GameObject(const char* textureSheet, SDL_Renderer* renderer, int xpos, int ypos);
+	GameObject(const char* textureSheet, SDL_Renderer* renderer, int x, int y);
 	~GameObject();
-	void update();
+	void update(float deltaTime);
 	void render();
-	void handleInput(SDL_Event event);
+	void setVelocityY(int val);
+	void move(int x, int y);
+	int getYpos();
+	int getXpos();
+	int getVelocityY();
+	void animateSprite();
+	void setSrcRect(int h, int w, int x, int y);
+	void setDestRect(int h, int w, int x, int y);
+	void clampObject(int xMin, int xMax, int yMin, int yMax);
+	void setTotalWidthTexture(int val);
 private:
 	int xpos;
 	int ypos;
 	int velocityX;
 	int velocityY;
-	
+	int totalWidthTexture;
 	SDL_Texture* texture;
 	SDL_Rect srcRect, destRect;
 	SDL_Renderer* renderer;

@@ -1,8 +1,9 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "GameObject.h"
+#include "Car.h"
 
-GameObject* player;
+Car* player;
 
 int cnt = 0;
 
@@ -29,9 +30,8 @@ void Game::init(const char* windowTitle, int xpos, int ypos, int width, int heig
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		}
 		isRunning = true;
-
 	}
-	player = new GameObject("Sprite/player.png", renderer, 0, 0);
+	player = new Car("Sprite/PlayerCar.png", renderer, 1, 1, 2, 3);
 }
 
 void Game::handleEvents()
@@ -44,9 +44,9 @@ void Game::handleEvents()
 		player->handleInput(event);
 }
 
-void Game::update()
+void Game::update(float deltaTime)
 {
-	player->update();
+	player->update(deltaTime);
 }
 
 void Game::render()

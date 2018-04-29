@@ -1,8 +1,5 @@
 #include "GameObject.h"
 
-
-
-
 GameObject::GameObject(const char* textureSheet, SDL_Renderer* rend, int x, int y)
 {
 	renderer = rend;
@@ -15,34 +12,80 @@ GameObject::GameObject(const char* textureSheet, SDL_Renderer* rend, int x, int 
 GameObject::~GameObject()
 {
 }
-void GameObject::update() 
+void GameObject::update(float deltaTime) 
 {
-	srcRect.h = 32;
-	srcRect.w = 32;
-	srcRect.x = 0;
-	srcRect.y = 0;
-
-	destRect.x = xpos;
-	destRect.y = ypos;
-	destRect.h = srcRect.h*2;
-	destRect.w = srcRect.w*2;
-	xpos += velocityX;
-	ypos += velocityY;
-
 }
 void GameObject::render()
 {
 	SDL_RenderCopy(renderer, texture, &srcRect, &destRect);
 }
 
-void GameObject::handleInput(SDL_Event event)
+void GameObject::setVelocityY(int val)
 {
-	if (event.type == SDLK_s)
-		velocityY = 1;
-	if (event.type == SDLK_w)
-		velocityY = -1;
-	if (event.type == SDLK_d)
-		velocityX = 1;
-	if (event.type == SDLK_a)
-		velocityX = -1;
+	velocityY = val;
+}
+
+void GameObject::move(int x, int y)
+{
+	xpos += x;
+	ypos += y;
+}
+
+int GameObject::getYpos()
+{
+	return ypos;
+}
+
+int GameObject::getXpos()
+{
+	return xpos;
+}
+
+int GameObject::getVelocityY()
+{
+	return velocityY;
+}
+
+void GameObject::animateSprite()
+{
+	setSrcRect(32, 96, srcRect.x, 0);
+	if (srcRect.x < totalWidthTexture - srcRect.w)
+		srcRect.x += srcRect.w;
+	else
+		srcRect.x = 0;
+	cout << srcRect.x << endl;
+	setDestRect(32, 96, getXpos(), getYpos());
+}
+
+void GameObject::setSrcRect(int h, int w, int x, int y)
+{
+	srcRect.h = h;
+	srcRect.w = w;
+	srcRect.x = x;
+	srcRect.y = y;
+}
+
+void GameObject::setDestRect(int h, int w, int x, int y)
+{
+	destRect.h = h * 2;
+	destRect.w = w * 2;
+	destRect.x = x;
+	destRect.y = y;
+}
+
+void GameObject::clampObject(int xMin, int xMax, int yMin, int yMax)
+{
+	if (xpos <= xMin)
+		xpos = xMin;
+	else if (xpos >= xMax)
+		xpos = xMax;
+	if (ypos <= yMin)
+		ypos = yMin;
+	else if (ypos >= yMax - destRect.h)
+		ypos = yMax - destRect.h;
+}
+
+void GameObject::setTotalWidthTexture(int val)
+{
+	totalWidthTexture = val;
 }
