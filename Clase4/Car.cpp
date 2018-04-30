@@ -1,14 +1,14 @@
 #include "Car.h"
 
 
-Car::Car(const char* texture, SDL_Renderer* renderer, int x, int y, int spd, int lif) : GameObject(texture,renderer,x,y)
+Car::Car(const char* texture, SDL_Renderer* renderer, int x, int y, int spd, int lif) : GameObject(texture, renderer, x, y)
 {
 	speed = spd;
 	life = lif;
-	setTotalWidthTexture(288);
 	setSrcRect(32, 96, 0, 0);
-	setDestRect(32, 96, 0, 0);
-	createCollider(32, 96);
+	setScale(2, 2);
+	setCollider(0, 0, 32, 96);
+	setAnimation(true);
 }
 
 Car::~Car()
@@ -33,10 +33,35 @@ void Car::handleInput(SDL_Event event)
 
 void Car::update(float deltaTime)
 {
-	animateSprite(deltaTime);
+	animateSprite(deltaTime,3,true);
 	colliderUpdate();
 	clampObject(10, 300, 100, 500);
 	move(getVelocityX(), getVelocityY());
-	
+	if (!canBeHit())
+		restTime += deltaTime;
+	if (restTime >= 25)
+	{
+		canHit = true;
+		restTime = 0;
+	}
 }
 
+void Car::hit()
+{
+	if (life > 0)
+	{
+		life--;
+		canHit = false;
+		cout << "auch" << endl;
+	}
+}
+
+bool Car::isAlive()
+{
+	return life > 0;
+}
+
+bool Car::canBeHit()
+{
+	return canHit;
+}

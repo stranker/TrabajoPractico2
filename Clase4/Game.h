@@ -3,6 +3,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
+#include <ctime>
+
 using namespace std;
 
 class Game

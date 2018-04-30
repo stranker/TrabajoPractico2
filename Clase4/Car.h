@@ -7,8 +7,13 @@ public:
 	~Car();
 	void handleInput(SDL_Event event);
 	void update(float deltaTime);
+	void hit();
+	bool isAlive();
+	bool canBeHit();
 private:
 	int speed;
 	int life;
+	bool canHit = true;
+	float restTime = 0;
 };
 

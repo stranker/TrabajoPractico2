@@ -10,12 +10,15 @@ GameObject::GameObject(const char* textureSheet, SDL_Renderer* rend, int x, int 
 	velocityY = 0;
 	animationTime = 0;
 }
+
 GameObject::~GameObject()
 {
 }
+
 void GameObject::update(float deltaTime) 
 {
 }
+
 void GameObject::render()
 {
 	SDL_RenderCopy(renderer, texture, &srcRect, &destRect);
@@ -43,6 +46,12 @@ int GameObject::getXpos()
 	return xpos;
 }
 
+void GameObject::setScale(float x, float y)
+{
+	scaleX = x;
+	scaleY = y;
+}
+
 int GameObject::getVelocityY()
 {
 	return velocityY;
@@ -53,19 +62,29 @@ int GameObject::getVelocityX()
 	return velocityX;
 }
 
-void GameObject::animateSprite(float deltaTime)
+void GameObject::animateSprite(float deltaTime, int frames, bool loop)
 {
-	animationTime += deltaTime;
-	if (animationTime > 1)
+	if (isAnimated)
 	{
-		animationTime = 0;
-		setSrcRect(srcRect.h,srcRect.w, srcRect.x, 0);
-		if (srcRect.x < totalWidthTexture - srcRect.w)
-			srcRect.x += srcRect.w;
-		else
-			srcRect.x = 0;
+		animationTime += deltaTime;
+		if (animationTime > 1)
+		{
+			animationTime = 0;
+			setSrcRect(srcRect.h, srcRect.w, srcRect.x, 0);
+			if (srcRect.x < srcRect.w * (frames - 1))
+				srcRect.x += srcRect.w;
+			else
+			{
+				if (loop)
+					srcRect.x = 0;
+				else
+					srcRect.x = srcRect.w * frames - srcRect.w;
+			}
+		}
 	}
-	setDestRect(srcRect.h, srcRect.w, xpos, ypos);
+	setSrcRect(srcRect.h, srcRect.w, srcRect.x, 0);
+	setDestRect(destRect.h, destRect.w, xpos, ypos);
+	
 }
 
 void GameObject::setSrcRect(int h, int w, int x, int y)
@@ -74,12 +93,17 @@ void GameObject::setSrcRect(int h, int w, int x, int y)
 	srcRect.w = w;
 	srcRect.x = x;
 	srcRect.y = y;
+
+	destRect.h = h * scaleY;
+	destRect.w = w * scaleX;
+	destRect.x = x;
+	destRect.y = y;
 }
 
 void GameObject::setDestRect(int h, int w, int x, int y)
 {
-	destRect.h = h * 2;
-	destRect.w = w * 2;
+	destRect.h = h;
+	destRect.w = w;
 	destRect.x = x;
 	destRect.y = y;
 }
@@ -96,21 +120,44 @@ void GameObject::clampObject(int xMin, int xMax, int yMin, int yMax)
 		ypos = yMax - srcRect.h;
 }
 
-void GameObject::setTotalWidthTexture(int val)
-{
-	totalWidthTexture = val;
-}
-
-void GameObject::createCollider(int h, int w)
-{
-	collider.h = h;
-	collider.w = w;
-}
-
 void GameObject::colliderUpdate()
 {
 	collider.x = xpos;
 	collider.y = ypos;
-	collider.h = srcRect.h;
-	collider.w = srcRect.w;
+	collider.h = destRect.h;
+	collider.w = destRect.w;
+}
+
+SDL_Rect GameObject::getCollider()
+{
+	return collider;
+}
+
+void GameObject::setNewPosition()
+{
+	xpos = 800 + rand() % 1600;
+	ypos = 100 + rand() % 400;
+}
+
+void GameObject::setAnimation(bool val)
+{
+	isAnimated = val;
+}
+
+void GameObject::resetSprite()
+{
+	srcRect.x = 0;
+}
+
+bool GameObject::isOffScreen()
+{
+	return getCollider().x + getCollider().w <= 0;
+}
+
+void GameObject::setCollider(int x, int y, int h, int w)
+{
+	collider.x = x;
+	collider.y = y;
+	collider.h = h * scaleY;
+	collider.w = w * scaleX;
 }
