@@ -76,11 +76,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDL\SDL2-2.0.8\include;$(SolutionDir)SDL\SDL2_image-2.0.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDL\SDL2-2.0.8\include;$(SolutionDir)SDL\SDL2_image-2.0.3\include;$(SolutionDir)SDL\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)SDL\SDL2-2.0.8\lib\x86;$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SDL\SDL2-2.0.8\lib\x86;$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86;$(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
@@ -90,7 +90,10 @@ copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\libpng16-16.dll $(OutputDir)
 copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\zlib1.dll $(OutputDir)
 copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\libwebp-7.dll $(OutputDir)
 copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\libtiff-5.dll $(OutputDir)
-</Command>
+copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\SDL2_ttf.dll $(OutputDir)
+copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\zlib1.dll $(OutputDir)
+copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\libfreetype-6.dll $(OutputDir)
+copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\libpng16-16.dll $(OutputDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -135,6 +138,7 @@ copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\libtiff-5.dll $(OutputDir)
     <ClCompile Include="Diamond.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -145,6 +149,7 @@ copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\libtiff-5.dll $(OutputDir)
     <ClInclude Include="Diamond.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Label.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>

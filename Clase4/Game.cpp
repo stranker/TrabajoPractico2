@@ -5,10 +5,13 @@
 #include "Collision.h"
 #include "Diamond.h"
 #include "Wall.h"
+#include "Label.h"
 
 Car* player;
 Diamond* diamonds[MAX_DIAMOND_COUNT];
 Wall* walls[MAX_WALL_COUNT];
+TTF_Font* font;
+Label* testLabel;
 
 void intializeDiamonds(SDL_Renderer* renderer)
 {
@@ -20,6 +23,14 @@ void intializeWalls(SDL_Renderer* renderer)
 {
 	for (int i = 0; i < MAX_WALL_COUNT; i++)
 		walls[i] = new Wall("Sprite/Wall.png", renderer, 0, 0);
+}
+
+void initializeLabels(SDL_Renderer* renderer)
+{
+	font = TTF_OpenFont("Fonts/Consola.ttf", 24);
+	SDL_Color red = { 255,0,0 };
+	testLabel = new Label("prueba", font, renderer, red, 100, 100);
+	testLabel->setLabelText();
 }
 
 Game::Game()
@@ -45,11 +56,19 @@ void Game::init(const char* windowTitle, int xpos, int ypos, int width, int heig
 		{
 			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		}
-		isRunning = true;
+		if (!IMG_Init(IMG_INIT_PNG))
+		{
+			cout << "Error al inicializar IMG" << endl;
+		}
+		if ( TTF_Init() == 0)
+		{
+			isRunning = true;
+		}
 	}
 	player = new Car("Sprite/PlayerCar.png", renderer, 1, 1, 2, 3);
 	intializeDiamonds(renderer);
 	intializeWalls(renderer);
+	initializeLabels(renderer);
 }
 
 void Game::handleEvents()
@@ -98,6 +117,7 @@ void Game::render()
 		walls[i]->render();
 	for (int i = 0; i < MAX_DIAMOND_COUNT; i++)
 		diamonds[i]->render();
+	testLabel->draw();
 	SDL_RenderPresent(renderer);
 }
 

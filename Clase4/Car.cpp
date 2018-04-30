@@ -48,12 +48,16 @@ void Car::update(float deltaTime)
 
 void Car::hit()
 {
-	if (life > 0)
+	if (canHit)
 	{
-		life--;
-		canHit = false;
-		cout << "auch" << endl;
+		if (life > 0)
+		{
+			life--;
+			canHit = false;
+			cout << "auch" << endl;
+		}
 	}
+	
 }
 
 bool Car::isAlive()
