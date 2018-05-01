@@ -70,7 +70,7 @@ void Game::init(const char* windowTitle, int xpos, int ypos, int width, int heig
 		isRunning = true;
 	}
 	initValues();
-	Mix_PlayMusic(music, -1);
+	
 }
 
 void Game::handleEvents()
@@ -109,6 +109,7 @@ void Game::update(float deltaTime)
 			{
 				diamonds[i]->pickUp();
 				score += 100;
+				Mix_PlayChannel(-1, diamondSound, 0);
 			}
 		}
 		for (int i = 0; i < MAX_WALL_COUNT; i++)
@@ -120,6 +121,7 @@ void Game::update(float deltaTime)
 				{
 					player->hit();
 					walls[i]->hit();
+					Mix_PlayChannel(-1, wallSound, 0);
 				}
 			}
 		}
@@ -154,12 +156,8 @@ void Game::clean()
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
-	Mix_FreeMusic(music);
 	SDL_Quit();
-	Mix_CloseAudio();
 	TTF_Quit();
-	TTF_CloseFont(font);
-	TTF_CloseFont(gameOverFont);
 	delete player;
 }
 
@@ -179,4 +177,7 @@ void Game::initValues()
 	lives = player->getLives();
 	gameOver = false;
 	music = Mix_LoadMUS("Sounds/Music.wav");
+	Mix_PlayMusic(music, -1);
+	wallSound = Mix_LoadWAV("Sounds/Wall.wav");
+	diamondSound = Mix_LoadWAV("Sounds/Diamond.wav");
 }

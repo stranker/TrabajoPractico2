@@ -26,9 +26,9 @@ private:
 	int lives;
 	void initializeLabel();
 	Mix_Music *music;
-	Mix_Chunk *diamond;
-	Mix_Chunk *car;
-	Mix_Chunk *wall;
+	Mix_Chunk *diamondSound;
+	Mix_Chunk *carSound;
+	Mix_Chunk *wallSound;
 public:
 	Game();
 	~Game();
