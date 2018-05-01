@@ -76,11 +76,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDL\SDL2-2.0.8\include;$(SolutionDir)SDL\SDL2_image-2.0.3\include;$(SolutionDir)SDL\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDL\SDL2-2.0.8\include;$(SolutionDir)SDL\SDL2_image-2.0.3\include;$(SolutionDir)SDL\SDL2_ttf-2.0.14\include;$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)SDL\SDL2-2.0.8\lib\x86;$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86;$(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SDL\SDL2-2.0.8\lib\x86;$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86;$(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86;$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
@@ -91,9 +91,8 @@ copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\zlib1.dll $(OutputDir)
 copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\libwebp-7.dll $(OutputDir)
 copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\libtiff-5.dll $(OutputDir)
 copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\SDL2_ttf.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\zlib1.dll $(OutputDir)
 copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\libfreetype-6.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\libpng16-16.dll $(OutputDir)</Command>
+copy $(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\SDL2_mixer.dll $(OutputDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

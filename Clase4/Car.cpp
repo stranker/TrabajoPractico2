@@ -69,3 +69,8 @@ bool Car::canBeHit()
 {
 	return canHit;
 }
+
+int Car::getLives()
+{
+	return life;
+}

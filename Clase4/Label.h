@@ -12,10 +12,8 @@ public:
 	Label(string text, TTF_Font* font, SDL_Renderer *renderer, SDL_Color color, int xpos, int ypos);
 	void setLabelText();
 	void draw();
-	static SDL_Color White();
-	static SDL_Color Black();
-	static SDL_Color Red();
 	~Label();
+	void setText(string text);
 private:
 	string text;
 	TTF_Font* font;

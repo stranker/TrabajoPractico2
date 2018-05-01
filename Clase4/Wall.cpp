@@ -3,6 +3,7 @@
 Wall::Wall(const char * textureSheet, SDL_Renderer * renderer, int x, int y) : GameObject(textureSheet, renderer, x, y)
 {
 	setSrcRect(32, 64, 0, 0);
+	setCollider(0, 0, 32, 64);
 	setScale(2, 2);
 	setNewPosition();
 	setAnimation(false);

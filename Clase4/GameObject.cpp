@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "TextureManager.h"
 
 GameObject::GameObject(const char* textureSheet, SDL_Renderer* rend, int x, int y)
 {
@@ -84,7 +85,6 @@ void GameObject::animateSprite(float deltaTime, int frames, bool loop)
 	}
 	setSrcRect(srcRect.h, srcRect.w, srcRect.x, 0);
 	setDestRect(destRect.h, destRect.w, xpos, ypos);
-	
 }
 
 void GameObject::setSrcRect(int h, int w, int x, int y)
@@ -124,8 +124,6 @@ void GameObject::colliderUpdate()
 {
 	collider.x = xpos;
 	collider.y = ypos;
-	collider.h = destRect.h;
-	collider.w = destRect.w;
 }
 
 SDL_Rect GameObject::getCollider()

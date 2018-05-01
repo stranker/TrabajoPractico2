@@ -10,8 +10,6 @@
 Car* player;
 Diamond* diamonds[MAX_DIAMOND_COUNT];
 Wall* walls[MAX_WALL_COUNT];
-TTF_Font* font;
-Label* testLabel;
 
 void intializeDiamonds(SDL_Renderer* renderer)
 {
@@ -25,12 +23,17 @@ void intializeWalls(SDL_Renderer* renderer)
 		walls[i] = new Wall("Sprite/Wall.png", renderer, 0, 0);
 }
 
-void initializeLabels(SDL_Renderer* renderer)
+void Game::initializeLabel()
 {
-	font = TTF_OpenFont("Fonts/Consola.ttf", 24);
-	SDL_Color red = { 255,0,0 };
-	testLabel = new Label("prueba", font, renderer, red, 100, 100);
-	testLabel->setLabelText();
+	font = TTF_OpenFont("Fonts/Consola.ttf", 22);
+	gameOverFont = TTF_OpenFont("Fonts/Consola.ttf", 36);
+	fontColor = { 255, 0, 0 };
+	scoreLabel = new Label("SCORE ", font, renderer, fontColor, 350, 10);
+	livesLabel = new Label("LIVES ", font, renderer, fontColor, 10, 10);
+	kmLabel = new Label("KM ", font, renderer, fontColor, 700, 10);
+	gameOverLabel = new Label("GAME OVER", gameOverFont, renderer, fontColor, 320, 250);
+	restartLabel = new Label("'R' TO RESTART", gameOverFont, renderer, fontColor, 10, 500);
+	menuLabel = new Label("'M' TO MENU", gameOverFont, renderer, fontColor, 550, 500);
 }
 
 Game::Game()
@@ -54,59 +57,77 @@ void Game::init(const char* windowTitle, int xpos, int ypos, int width, int heig
 			renderer = SDL_CreateRenderer(window, -1, 0);
 		if (renderer)
 		{
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		}
-		if (!IMG_Init(IMG_INIT_PNG))
+		if ( TTF_Init() == -1)
 		{
-			cout << "Error al inicializar IMG" << endl;
+			cout << "No se inicializo TTF" << endl;
 		}
-		if ( TTF_Init() == 0)
+		if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 		{
-			isRunning = true;
+			cout << "No se inicializo mixer" << endl;
 		}
+		isRunning = true;
 	}
-	player = new Car("Sprite/PlayerCar.png", renderer, 1, 1, 2, 3);
-	intializeDiamonds(renderer);
-	intializeWalls(renderer);
-	initializeLabels(renderer);
+	initValues();
+	Mix_PlayMusic(music, -1);
 }
 
 void Game::handleEvents()
 {
 	SDL_Event event;
 	SDL_PollEvent(&event);
-	if (event.type == SDL_QUIT)
+	if (event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE)
 		isRunning = false;
 	else
 		player->handleInput(event);
+	if (gameOver)
+	{
+		if (event.key.keysym.sym == SDLK_r)
+		{
+			initValues();
+		}
+		if (event.key.keysym.sym == SDLK_m)
+		{
+
+		}
+	}
 }
 
 void Game::update(float deltaTime)
 {
-	player->update(deltaTime);
-	for (int i = 0; i < MAX_DIAMOND_COUNT; i++)
+	if (player->getLives()<= 0)
+		gameOver = true;
+	if (!gameOver)
 	{
-		diamonds[i]->update(deltaTime);
-		if (Collision::AABB(player->getCollider(), diamonds[i]->getCollider()))
-			diamonds[i]->pickUp();
-	}
-	for (int i = 0; i < MAX_WALL_COUNT; i++)
-	{
-		walls[i]->update(deltaTime);
-		if (Collision::AABB(player->getCollider(), walls[i]->getCollider()))
+		player->update(deltaTime);
+		km += deltaTime;
+		for (int i = 0; i < MAX_DIAMOND_COUNT; i++)
 		{
-			if (player->canBeHit())
+			diamonds[i]->update(deltaTime);
+			if (Collision::AABB(player->getCollider(), diamonds[i]->getCollider()))
 			{
-				player->hit();
-				walls[i]->hit();
+				diamonds[i]->pickUp();
+				score += 100;
 			}
 		}
-	}
+		for (int i = 0; i < MAX_WALL_COUNT; i++)
+		{
+			walls[i]->update(deltaTime);
+			if (Collision::AABB(player->getCollider(), walls[i]->getCollider()))
+			{
+				if (player->canBeHit())
+				{
+					player->hit();
+					walls[i]->hit();
+				}
+			}
+		}
 
-	/*if (!player->isAlive())
-	{
-		isRunning = false;
-	}*/
+		scoreLabel->setText("SCORE " + to_string(score));
+		livesLabel->setText("LIVES " + to_string(player->getLives()));
+		kmLabel->setText("KM " + to_string(km));
+	}
 }
 
 void Game::render()
@@ -117,7 +138,15 @@ void Game::render()
 		walls[i]->render();
 	for (int i = 0; i < MAX_DIAMOND_COUNT; i++)
 		diamonds[i]->render();
-	testLabel->draw();
+	scoreLabel->draw();
+	kmLabel->draw();
+	livesLabel->draw();
+	if (gameOver)
+	{
+		gameOverLabel->draw();
+		restartLabel->draw();
+		menuLabel->draw();
+	}
 	SDL_RenderPresent(renderer);
 }
 
@@ -125,11 +154,29 @@ void Game::clean()
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
+	Mix_FreeMusic(music);
 	SDL_Quit();
+	Mix_CloseAudio();
+	TTF_Quit();
+	TTF_CloseFont(font);
+	TTF_CloseFont(gameOverFont);
 	delete player;
 }
 
 bool Game::running()
 {
 	return isRunning;
+}
+
+void Game::initValues()
+{
+	player = new Car("Sprite/PlayerCar.png", renderer, 1, 1, 3, 3);
+	intializeDiamonds(renderer);
+	intializeWalls(renderer);
+	initializeLabel();
+	km = 0;
+	score = 0;
+	lives = player->getLives();
+	gameOver = false;
+	music = Mix_LoadMUS("Sounds/Music.wav");
 }

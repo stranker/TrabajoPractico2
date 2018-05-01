@@ -3,8 +3,11 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <iostream>
 #include <ctime>
+#include "Label.h"
+#include <string> 
 
 using namespace std;
 
@@ -14,6 +17,18 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	bool isRunning = false;
+	bool gameOver = false;
+	Label *scoreLabel, *livesLabel, *kmLabel, *gameOverLabel, *restartLabel, *menuLabel;
+	SDL_Color fontColor;
+	TTF_Font *font, *gameOverFont;
+	int score;
+	float km;
+	int lives;
+	void initializeLabel();
+	Mix_Music *music;
+	Mix_Chunk *diamond;
+	Mix_Chunk *car;
+	Mix_Chunk *wall;
 public:
 	Game();
 	~Game();
@@ -24,6 +39,7 @@ public:
 	void render();
 	void clean();
 	bool running();
+	void initValues();
 };
 
 #endif

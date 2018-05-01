@@ -8,6 +8,7 @@ Label::Label(string txt, TTF_Font* fnt, SDL_Renderer *rend, SDL_Color clr, int x
 	position.y = ypos;
 	renderer = rend;
 	color = clr;
+	setLabelText();
 }
 
 
@@ -25,24 +26,12 @@ void Label::draw()
 	SDL_RenderCopy(renderer, texture, nullptr, &position);
 }
 
-SDL_Color Label::White()
-{
-	SDL_Color white = { 255,255,255 };
-	return white;
-}
-
-SDL_Color  Label::Black()
-{
-	SDL_Color black = {0,0,0};
-	return black;
-}
-
-SDL_Color  Label::Red()
-{
-	SDL_Color red = { 255,0,0 };
-	return red;
-}
-
 Label::~Label()
 {
+}
+
+void Label::setText(string txt)
+{
+	text = txt;
+	setLabelText();
 }

@@ -10,6 +10,7 @@ public:
 	void hit();
 	bool isAlive();
 	bool canBeHit();
+	int getLives();
 private:
 	int speed;
 	int life;
