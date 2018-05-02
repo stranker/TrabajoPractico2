@@ -8,6 +8,7 @@
 #include <ctime>
 #include "Label.h"
 #include <string> 
+#include <Windows.h>
 
 using namespace std;
 

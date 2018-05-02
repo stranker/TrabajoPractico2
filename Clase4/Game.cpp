@@ -33,7 +33,7 @@ void Game::initializeLabel()
 	kmLabel = new Label("KM ", font, renderer, fontColor, 700, 10);
 	gameOverLabel = new Label("GAME OVER", gameOverFont, renderer, fontColor, 320, 250);
 	restartLabel = new Label("'R' TO RESTART", gameOverFont, renderer, fontColor, 10, 500);
-	menuLabel = new Label("'M' TO MENU", gameOverFont, renderer, fontColor, 550, 500);
+	menuLabel = new Label("'ESC' TO EXIT", gameOverFont, renderer, fontColor, 550, 500);
 }
 
 Game::Game()

@@ -1,4 +1,3 @@
-#include "SDL.h"
 #include "Game.h"
 
 int main(int argc, char* argv[]) 
@@ -10,7 +9,6 @@ int main(int argc, char* argv[])
 	const float frameDelay = 1000 / FPS;
 	Uint32 frameStart;
 	float frameTime = 0;
-
 	while (game->running())
 	{
 		frameStart = SDL_GetTicks();
