@@ -99,10 +99,10 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)SDL\SDL2-2.0.8\lib\x86\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll $(OutputDir)</Command>
+      <Command>copy "$(SolutionDir)SDL\SDL2-2.0.8\lib\x86\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -120,10 +120,10 @@ copy $(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll 
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)SDL\SDL2-2.0.8\lib\x64\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x64\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x64\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x64\*.dll $(OutputDir)</Command>
+      <Command>copy "$(SolutionDir)SDL\SDL2-2.0.8\lib\x64\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x64\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x64\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x64\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,10 +144,10 @@ copy $(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x64\*.dll 
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)SDL\SDL2-2.0.8\lib\x86\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll $(OutputDir)</Command>
+      <Command>copy "$(SolutionDir)SDL\SDL2-2.0.8\lib\x86\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -168,10 +168,10 @@ copy $(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll 
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)SDL\SDL2-2.0.8\lib\x64\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_image-2.0.3\lib\x64\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x64\*.dll $(OutputDir)
-copy $(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x64\*.dll $(OutputDir)</Command>
+      <Command>copy "$(SolutionDir)SDL\SDL2-2.0.8\lib\x64\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x64\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x64\*.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x64\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
