@@ -102,7 +102,10 @@
       <Command>copy "$(SolutionDir)SDL\SDL2-2.0.8\lib\x86\*.dll" "$(OutDir)"
 copy "$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\*.dll" "$(OutDir)"
 copy "$(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\*.dll" "$(OutDir)"
-copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll" "$(OutDir)"</Command>
+copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Fonts" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Sounds" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Sprite" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -123,7 +126,10 @@ copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll
       <Command>copy "$(SolutionDir)SDL\SDL2-2.0.8\lib\x64\*.dll" "$(OutDir)"
 copy "$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x64\*.dll" "$(OutDir)"
 copy "$(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x64\*.dll" "$(OutDir)"
-copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x64\*.dll" "$(OutDir)"</Command>
+copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x64\*.dll" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Fonts" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Sounds" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Sprite" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,7 +153,10 @@ copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x64\*.dll
       <Command>copy "$(SolutionDir)SDL\SDL2-2.0.8\lib\x86\*.dll" "$(OutDir)"
 copy "$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x86\*.dll" "$(OutDir)"
 copy "$(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x86\*.dll" "$(OutDir)"
-copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll" "$(OutDir)"</Command>
+copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Fonts" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Sounds" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Sprite" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -171,7 +180,10 @@ copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x86\*.dll
       <Command>copy "$(SolutionDir)SDL\SDL2-2.0.8\lib\x64\*.dll" "$(OutDir)"
 copy "$(SolutionDir)SDL\SDL2_image-2.0.3\lib\x64\*.dll" "$(OutDir)"
 copy "$(SolutionDir)SDL\SDL2_ttf-2.0.14\lib\x64\*.dll" "$(OutDir)"
-copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x64\*.dll" "$(OutDir)"</Command>
+copy "$(SolutionDir)SDL\SDL2_mixer-devel-2.0.2-VC\SDL2_mixer-2.0.2\lib\x64\*.dll" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Fonts" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Sounds" "$(OutDir)"
+copy "$(SolutionDir)Clase4\Sprite" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
