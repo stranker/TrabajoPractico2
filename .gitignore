@@ -16,3 +16,7 @@ Clase4/x64/Release/Clase4\.tlog/
 Clase4/x64/Release/
 
 x64/Release/
+
+bin/
+
+obj/
